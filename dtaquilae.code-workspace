@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "./dtaquilae"
+		},
+		{
+			"path": "./dtaquilae-api"
+		}
+	],
+	"settings": {
+		"postman.settings.dotenv-detection-notification-visibility": false
+	}
+}

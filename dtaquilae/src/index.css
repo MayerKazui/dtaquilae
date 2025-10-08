@@ -1,0 +1,573 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* CSS servant à la mise en page principale de l'application */
+@layer base {
+  * {
+    @apply box-border;
+  }
+
+  html,
+  body,
+  #root,
+  #defaultLayout,
+  #guestLayout,
+  #stagiaireLayout,
+  #notFoundPage {
+    @apply min-h-screen;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
+    @apply m-0;
+  }
+
+  label {
+    @apply text-lg;
+  }
+
+  body {
+    @apply m-0 
+    bg-gray-100 
+    p-0 
+    text-sm 
+    font-semibold
+    text-gray-950;
+  }
+
+  button {
+    @apply m-2 p-2;
+  }
+  input,
+  textarea,
+  select {
+    @apply mx-0 
+    mb-4 
+    mt-0 
+    box-border 
+    w-full
+    rounded-md 
+    border-2 
+    border-solid 
+    bg-white
+    p-4 
+    text-sm 
+    outline-0 
+    transition-all;
+
+    &:focus {
+      @apply border-purple-800
+      outline-none;
+    }
+
+    &.select-status {
+      @apply mb-0
+    w-1/12;
+    }
+
+    &:disabled {
+      @apply opacity-90;
+      &:hover {
+        @apply cursor-not-allowed;
+      }
+    }
+  }
+  table {
+    @apply w-full
+    border-collapse
+    border-spacing-0;
+    > thead > tr > th {
+      @apply bg-gray-200
+      p-2
+      text-left;
+    }
+    > tbody > tr > td {
+      @apply whitespace-nowrap
+      border-b
+      border-solid
+      border-gray-200
+      p-2;
+    }
+  }
+
+  #defaultLayout,
+  #stagiaireLayout {
+    @apply z-0 flex;
+
+    & aside {
+      @apply w-1/8
+      sticky
+      left-0
+      top-0
+      z-50
+      h-screen
+      bg-violet-800
+      p-4;
+
+      & a {
+        @apply block
+        rounded-md
+        px-4
+        py-3
+        text-white
+        transition-all;
+
+        &:hover {
+          @apply bg-violet-950;
+        }
+      }
+    }
+
+    & header {
+      @apply sticky
+      top-0
+      z-50
+      flex
+      h-20
+      items-center
+      justify-between
+      bg-white
+      px-12
+      py-8
+      shadow-sm;
+    }
+
+    & main {
+      @apply p-8;
+    }
+
+    .content {
+      @apply flex-1;
+    }
+  }
+}
+
+/* CSS ayant pour vocation d'être utilisé pour un composant réutilisé (type bouton, etc...) */
+@layer components {
+  .title {
+    @apply mb-2 text-2xl font-bold;
+  }
+  .selectForm {
+    @apply mx-0 
+    mb-4 
+    mt-0 
+    box-border 
+    w-full 
+    border-2 
+    border-solid 
+    bg-white
+    p-4 
+    text-sm 
+    font-bold 
+    outline-0
+    transition-all;
+    color: #555;
+
+    &:focus {
+      @apply border-blue-800;
+    }
+  }
+  .inputForm {
+    @apply bg-white text-sm font-bold;
+    color: #555;
+  }
+
+  .formContainer {
+    @apply mx-5
+    max-w-screen-md
+    text-center;
+  }
+  .modern-form {
+    @apply mb-6
+    w-auto
+    rounded-xl 
+    bg-white 
+    p-6
+    shadow-md;
+  }
+  .label-form {
+    @apply text-gray-600;
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  .btn {
+    @apply cursor-pointer
+    rounded
+    border-0
+    bg-violet-700
+    px-3
+    py-2
+    text-sm
+    text-white
+    outline-0
+    transition-all;
+
+    &-add {
+      @apply bg-green-700;
+    }
+
+    &-flex-right {
+      @apply ml-auto
+      flex
+      items-center
+      px-4
+      py-1
+      text-base;
+    }
+
+    &-delete {
+      @apply bg-red-700;
+    }
+
+    &-export {
+      @apply float-left
+    w-1/12;
+    }
+
+    &-logout {
+      @apply bg-white 
+      text-black;
+
+      &:hover {
+        @apply bg-gray-200;
+      }
+    }
+
+    &-gerer-questions {
+      @apply my-1
+      mr-1
+      py-2
+      text-base;
+    }
+
+    &-block {
+      @apply w-full;
+      &:hover,
+      &:focus,
+      &:active {
+        @apply bg-violet-900;
+      }
+    }
+  }
+
+  .card {
+    @apply mb-4
+    mt-2
+    rounded-lg
+    bg-white
+    px-6
+    py-5
+    shadow-sm;
+  }
+
+  .alert {
+    @apply mb-4
+    rounded-lg
+    bg-red-600
+    p-4
+    text-white;
+  }
+
+  .notification {
+    @apply z-100
+    fixed
+    bottom-4
+    right-4
+    rounded-lg
+    bg-green-600
+    px-6
+    py-4
+    text-white;
+
+    &.token-expired {
+      @apply bg-red-700;
+    }
+  }
+
+  .error-page {
+    @apply mb-4
+    flex
+    h-screen
+    items-center
+    justify-center
+    text-center
+    text-xl;
+  }
+
+  .login-signup-form {
+    @apply mb-4
+    flex
+    h-screen
+    items-center
+    justify-center
+    text-center
+    text-xl;
+
+    .form {
+      @apply w-85
+      z-1
+      max-w-22-5
+      relative
+      bg-white
+      p-8
+      shadow-sm;
+
+      .message {
+        @apply mx-0
+        mb-0
+        mt-4
+        text-center
+        text-base
+        text-gray-400;
+        a {
+          @apply text-violet-800;
+        }
+      }
+
+      .alert {
+        @apply text-sm;
+      }
+    }
+  }
+
+  div.heading {
+    @apply mt-1
+    flex
+    justify-normal;
+  }
+
+  .search-bar {
+    @apply mb-0 
+    mr-4
+    box-border
+    max-w-fit
+    p-1
+    text-base
+    outline-0
+    transition-all;
+
+    &:focus {
+      @apply border-purple-800;
+    }
+  }
+
+  div.pagination {
+    @apply flex
+    items-center
+    justify-center;
+  }
+
+  .loading {
+    @apply h-8
+    w-8
+    rounded-full
+    bg-gray-600;
+    animation: loading-animation 2.8s infinite;
+  }
+
+  .statut-question {
+    @apply rounded-full px-2 py-1 text-base;
+
+    &-vigilance {
+      @apply bg-red-600;
+    }
+
+    &-a-verifier {
+      @apply bg-yellow-600;
+    }
+
+    &-validee {
+      @apply bg-green-600;
+    }
+
+    &-archivee {
+      @apply bg-gray-400;
+    }
+
+    &-a-valider {
+      @apply bg-orange-600;
+    }
+  }
+
+  .pagination-container {
+    @apply flex 
+    list-none;
+
+    .pagination-item {
+      @apply min-w-32
+      mx-1 
+      my-auto 
+      box-border 
+      flex 
+      h-8 
+      items-center 
+      rounded-2xl 
+      bg-transparent 
+      px-3 
+      py-0 
+      text-center 
+      text-sm;
+
+      &.dots:hover {
+        @apply cursor-default 
+        bg-transparent;
+      }
+
+      &:hover {
+        @apply cursor-pointer 
+        bg-gray-200;
+      }
+
+      &.selected {
+        @apply bg-gray-200;
+      }
+
+      .arrow {
+        &::before {
+          @apply relative 
+          inline-block 
+          h-2 
+          w-2 
+          border-r-2 
+          border-t-2 
+          border-r-black 
+          border-t-black 
+          content-[''];
+        }
+
+        &.left {
+          @apply rotate-135 -translate-x-2/4;
+          transform: rotate(-135deg) translate(-50%);
+        }
+
+        &.right {
+          @apply rotate-45;
+        }
+      }
+
+      &.disabled {
+        @apply pointer-events-none;
+
+        .arrow::before {
+          @apply border-r-2 
+          border-t-2 
+          border-r-gray-300 
+          border-t-gray-300;
+        }
+
+        &:hover {
+          @apply cursor-default 
+          bg-transparent;
+        }
+      }
+    }
+  }
+
+  @keyframes loading-animation {
+    0%,
+    100% {
+      transform: translate(-33.6px, -33.6px);
+      box-shadow: 0 0 #989898, 0 0 #afafaf;
+    }
+
+    12.5% {
+      transform: translate(33.6px, -33.6px);
+      box-shadow: -16.8px 0 #989898, -33.6px 0 #afafaf;
+    }
+
+    25% {
+      transform: translate(33.6px, -33.6px);
+      box-shadow: 0 0 #989898, 0 0 #afafaf;
+    }
+
+    37.5% {
+      transform: translate(33.6px, 33.6px);
+      box-shadow: 0 -16.8px #989898, 0 -33.6px #afafaf;
+    }
+
+    50% {
+      transform: translate(33.6px, 33.6px);
+      box-shadow: 0 0 #989898, 0 0 #afafaf;
+    }
+
+    62.5% {
+      transform: translate(-33.6px, 33.6px);
+      box-shadow: 16.8px 0 #989898, 33.6px 0 #afafaf;
+    }
+
+    75% {
+      transform: translate(-33.6px, 33.6px);
+      box-shadow: 0 0 #989898, 0 0 #afafaf;
+    }
+
+    87.5% {
+      transform: translate(-33.6px, -33.6px);
+      box-shadow: 0 16.8px #989898, 0 33.6px #afafaf;
+    }
+  }
+  .input-error {
+    border-color: #dc2626; /* Couleur rouge */
+  }
+}
+.p-timeline-event {
+  display: block !important;
+}
+.p-checkbox-input {
+  @apply m-0 flex bg-red-500 p-2;
+  &:checked {
+    @apply opacity-0;
+  }
+}
+
+/* CSS ayant pour vocation d'étendre les classes déjà existantes (exemple: si un padding spécifique n'existe pas) 
+  Les classes déclarées ici peuvent être utilisées via "@apply" dans "@layer components"
+*/
+@layer utilities {
+  .w-1\/8 {
+    width: 12.5%;
+  }
+
+  .z-1 {
+    z-index: 1;
+  }
+
+  .z-100 {
+    z-index: 100;
+  }
+
+  .w-85 {
+    width: 22.5rem; /*360px*/
+  }
+
+  .max-w-22-5 {
+    max-width: 22.5rem; /*360px*/
+  }
+
+  .min-w-32 {
+    min-width: 2rem; /*32px*/
+  }
+
+  .rotate-135 {
+    transform: rotate(-135deg);
+  }
+}
+
+input[type="checkbox"].smallCheck {
+  width: 40px;
+  margin-top: 15px;
+}
+
+.stagiaire-name {
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.5em;
+  margin-bottom: 1em;
+  margin-top: 30px;
+}
